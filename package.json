@@ -4,8 +4,11 @@
   "description": "\"Shopping list app built with the mern stack\"",
   "main": "index.js",
   "scripts": {
+    "client-install": "npm install --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client \""
   },
   "keywords": [],
   "author": "Daniel H Tannehill",
@@ -17,8 +20,11 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.2",
+    "create-react-app": "^3.1.2",
     "express": "^4.17.1",
-    "mongoose": "^5.7.1"
+    "mernapp": "file:client",
+    "mongoose": "^5.7.1",
+    "yarn": "^1.19.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.2"
