@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addBook } from '../actions/bookActions';
+import uuid from 'uuid';
 
 class BookModal extends Component {
  state = {
@@ -27,6 +28,21 @@ class BookModal extends Component {
  onChange = (e) => {
    this.setState({ [e.target.name ]: e.target.value });
  }
+
+ onSubmit= e => {
+   e.preventDefault();
+
+   const newBook = {
+     id: uuid(),
+     name: this.state.name
+   }
+
+//Add book via add book action
+   this.props.addBook(newBook);
+
+//Close modal
+   this.toggle();
+ };
 
  render () {
    return (
@@ -72,4 +88,8 @@ class BookModal extends Component {
  }
 }
 
-export default connect()(BookModal);
+const mapStateToProps = state => ({
+  book: state.book
+})
+
+export default connect(mapStateToProps, { addBook })(BookModal);
