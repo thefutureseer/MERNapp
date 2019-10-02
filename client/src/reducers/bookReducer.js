@@ -6,15 +6,20 @@ const initialState = {
       { id: uuid(), name: "Part 3 Star Wars"},
       { id: uuid(), name: "Widow in the woods"},
       { id: uuid(), name: "Sleepy Hallow"},
-      { id: uuid(), name: "Sleepy Hallow part 2"}
+      { id: uuid(), name: "Halloween 2"}
     ]
 }
 export default function(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
    case GET_BOOKS:
      return {
        ...state
-     }
+     };
+   case DELETE_BOOK:
+     return {
+       ...state,
+       books: state.books.filter(book => book.id !== action.payload)
+     };
    default:
      return state;
   }

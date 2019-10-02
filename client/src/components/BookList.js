@@ -3,13 +3,17 @@ import {Container, ListGroup, ListGroupItem, Button} from 'reactstrap';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import uuid from 'uuid';
 import { connect } from 'react-redux';
-import { getBooks } from '../actions/bookActions';
+import { getBooks, deleteBook } from '../actions/bookActions';
 import PropTypes from 'prop-types';
 
 class BookList extends Component {
 
   componentDidMount() {
     this.props.getBooks();
+  }
+
+  onDeleteClick = id => {
+    this.props.deleteBook(id);
   }
 
   render() {
@@ -38,11 +42,7 @@ class BookList extends Component {
                         className="remove-btn" 
                         color="danger" 
                         size="sm" 
-                        onClick={() => {
-                          this.setState (state => ({
-                           books: state.books.filter(book => book.id !== id)
-                          }));
-                        }}> 
+                        onClick={this.onDeleteClick.bind(this, id)}> 
                          &times; 
                      </Button>
                    </div>
@@ -68,4 +68,4 @@ const mapStateToProps = (state) => ({
   book: state.book
 });
 
-export default connect(mapStateToProps, { getBooks })(BookList);
+export default connect(mapStateToProps, { getBooks, deleteBook })(BookList);
