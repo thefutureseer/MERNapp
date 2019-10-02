@@ -16,6 +16,7 @@ margin: 4rems;
 padding: 1rems;
 box-shadow: 0 0 9px black;
 }
+
 .fade-enter {
  opacity: 0.1;
 }

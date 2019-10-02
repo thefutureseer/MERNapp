@@ -2,18 +2,18 @@ import React, {Component} from 'react';
 import {Container, ListGroup, ListGroupItem, Button} from 'reactstrap';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import uuid from 'uuid';
+import { connect } from 'react-redux';
+import { getBooks } from '../actions/bookActions';
+import PropTypes from 'prop-types';
 
 class BookList extends Component {
-  state = {
-    books: [
-      { id: uuid(), name: "Part 3 Star Wars"},
-      { id: uuid(), name: "Widow in the woods"},
-      { id: uuid(), name: "Sleepy Hallow"},
-      { id: uuid(), name: "Sleepy Hallow part 2"}
-    ]
+
+  componentDidMount() {
+    this.props.getBooks();
   }
+
   render() {
-    const { books }= this.state;
+    const { books } = this.props.book;
     return (
       <Container>
         <Button
@@ -33,17 +33,21 @@ class BookList extends Component {
               {books.map(({ id, name}) => (
                <CSSTransition key={id} timeout={500} classNames="fade">
                  <ListGroupItem>
-                   <div className="remove-btn"><Button 
-                     className="remove-btn" 
-                     color="danger" 
-                     size="sm" 
-                     onClick={() => {
-                       this.setState (state => ({
-                       books: state.books.filter(book => book.id !== id)
-                       }));
-                   }}> &times; </Button></div>
+                   <div className="remove-btn">
+                     <Button 
+                        className="remove-btn" 
+                        color="danger" 
+                        size="sm" 
+                        onClick={() => {
+                          this.setState (state => ({
+                           books: state.books.filter(book => book.id !== id)
+                          }));
+                        }}> 
+                         &times; 
+                     </Button>
+                   </div>
                    <div className="list">
-                   {name}
+                     {name}
                    </div>
                  </ListGroupItem>
                </CSSTransition>
@@ -54,4 +58,14 @@ class BookList extends Component {
     );
   }
 }
-export default BookList;
+
+BookList.propTypes = {
+  getBooks: PropTypes.func.isRequired,
+  book: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  book: state.book
+});
+
+export default connect(mapStateToProps, { getBooks })(BookList);
