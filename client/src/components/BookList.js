@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Container, ListGroup, ListGroupItem, Button} from 'reactstrap';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
-import uuid from 'uuid';
 import { connect } from 'react-redux';
 import { getBooks, deleteBook } from '../actions/bookActions';
 import PropTypes from 'prop-types';
@@ -20,18 +19,6 @@ class BookList extends Component {
     const { books } = this.props.book;
     return (
       <Container>
-        <Button
-          color="dark"
-          style={{marginBottom: "2rem"}}
-          onClick={ () => {
-            const name = prompt('enter book');
-            if ( name ) {
-              this.setState(state => ({
-                books: [ ...state.books, {id: uuid(), name: name }]
-              }));
-            }
-          }
-          }>Add Item</Button>
           <ListGroup>
             <TransitionGroup className="book-list">
               {books.map(({ id, name}) => (
