@@ -2,23 +2,23 @@ const express = require('express');
 //use router part of express object
 const router = express.Router();
 
-//item model
+//book model
 const Book = require('../../models/Book');
 
-//route GET request api/books: get all items
+//route GET request api/books: get all books
 router.get('/', (req, res) => {
  Book.find()
-  .sort({ name: -1  })
+  .sort({ date: -1 })
   .then(books => res.json(books));
 });
 
-// POST api/books create a Book constructor
+// POST api/books 
 router.post('/', (req, res) => {
   const newBook = new Book({
-    name: req.body.name,
-    author: req.body.author,
-    description: req.body.description,
-    image: req.body.image
+    name: req.body.name
+    // author: req.body.author,
+    // description: req.body.description,
+    // image: req.body.image
   });
   newBook.save().then(book => res.json(book));
 });

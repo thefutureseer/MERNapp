@@ -8,21 +8,10 @@ const BookSchema = new Schema({
    type: String,
    required: true
  },
-  author: {
-   type: String,
-   required: true
-  },
- description: {
-  type: String,
-  required: true
- },
- image: {
-   type: String,
-   required: false
- }
-//  link: {
-//   type: String,
-//   required: false
-//  }
+  date: {
+    type: Date,
+    default: Date.now
+  }
+
 });
-module.exports = book = mongoose.model('book', BookSchema);
+module.exports = Book = mongoose.model('book', BookSchema);
