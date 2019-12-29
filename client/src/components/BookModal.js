@@ -51,32 +51,32 @@ class BookModal extends Component {
             color="dark"
             style={{marginButton: '2rem'}}
             onClick={this.toggle}>
-              Add Book comming sooon!
+              Add to Your Cloud
        </Button>
        <Modal 
          isOpen={this.state.modal}
          toggle={this.toggle} >
         <ModalHeader toggle={this.toggle} >
-          Add to Book list Comming soon!
+          Add a Thing
         </ModalHeader>
         <ModalBody>
           <Form onSubmit={this.onSubmit}>
             <FormGroup>
               <Label for="book">
-                Book
+                Save in Cloud
               </Label>
               <Input 
                 type="text"
                 name="name"
                 id="book"
-                placeholder="Add to book list"
+                placeholder="Send to cloud storage"
                 onChange={this.onChange}
                 />
               <Button
                 color="dark"
                 style={{marginTop: '2rem'}}
                 block >
-                Add Book +2
+                Send
               </Button>
             </FormGroup>
           </Form>
